@@ -1,0 +1,66 @@
+{% extends 'advertisements/base.html' %}  
+{% load static %}
+{% block style %}
+<link href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<!--==========================
+Contact Section
+============================-->
+<section id="contact" class="wow fadeInUp">
+    <div class="container">
+        <div class="section-header">
+            <h2>Job Posts <button type="button" class="btn btn-success" style="float:right;" onclick="window.location.href='/addpost/';">Add Post</button></h2>
+        </div>
+    </div>
+    <div class="container">                                                                  
+        <div class="table-responsive">          
+            <table class="table" id="posts">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Title</th>
+                        <!--<th>Description</th>-->
+                        <th>Address</th>
+                        <th>Organization</th>
+                        <th>Hourly Rate($)</th>
+                        <th>Job Type</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if posts %}
+                        {% for post in posts %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{ post.title }}</td>
+                            <!--<td>{{ post.description|safe }}</td>-->
+                            <td>{{ post.address }}</td>
+                            <td>{{ post.organization }}</td>
+                            <td>{{ post.hourly_rate }}</td>
+                            <td>{{ post.job_type }}</td>
+                            <td>
+                                <a href="{% url 'viewpost' post.id %}"><button type="button" class="btn btn-primary">View</button></a>
+                                <button type="button" class="btn btn-danger" onclick="deletePost({{ post.id }})">Delete</button>
+                                <a href="{% url 'updatepost' post.id %}"><button type="button" class="btn btn-warning">Update</button></a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+      </div>
+</section><!-- #contact -->
+{% endblock %}
+{% block script %}
+<script src="{% static "js/post.js" %}"></script>
+<script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script>
+    $(document).ready( function () {
+        $('#posts').DataTable();
+    } );
+</script>
+
+{% endblock %}

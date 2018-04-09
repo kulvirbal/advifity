@@ -1,0 +1,46 @@
+{% extends 'advertisements/base.html' %}  
+{% load static %}
+{% block content %}
+<!--==========================
+View Post Section
+============================-->
+<section id="contact" class="wow fadeInUp">
+    <div class="container">
+        <div class="section-header">
+            <h2>Job Posts</h2>
+        </div>
+    </div>
+    <div class="container">
+        <div class="col-sm-4 category-left">
+            <form action="/searchjob" method="get">
+                <input type="text" placeholder="Search.." name="search" id="autocomplete">
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
+            <p class="search-by">Serach By Job Type</p>
+            <ul class="who-applied">
+                {% if types %}
+                    {% for type in types %}
+                        <li><a href="/searchjob/?type={{type.id}}&search={{search}}">{{type.name}}</a></li>
+                    {% endfor %}
+                {% endif %}
+            </ul>
+        </div>
+        <div class="col-sm-8 posts">
+            {% if posts %}
+                {% for post in posts %}
+                    <div class="post">
+                        <h3 onclick="window.location.href='/getpost/{{ post.id }}';">{{post.title}}</h3>
+                        <div class="post-desc">{{post.description|safe|slice:"0:300" }}</div>
+                        <div class="post-desc-hidden">{{post.description|safe}}</div>
+                        <div class="read-more">Read More</div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="post">
+                    <h3 style="text-align:center;">No Related Job Post to Show</h3>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}

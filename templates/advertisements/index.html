@@ -1,0 +1,99 @@
+{% extends 'advertisements/base.html' %}  
+{% load static %}
+{% block style %}
+    <link href="{% static "css/bxslider.css" %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+{% if error %}
+    <div id="errormessage" style="display:block;">{{ error }}</div>
+{% endif %}
+{% if success %}
+    <div id="sendmessage" style="display:block;">{{ success }}</div>
+{% endif %}
+<section id="intro">
+    <div class="intro-content">
+        <h2>Making <span>your dreams</span><br>come true!</h2>
+        <div>
+            {% if request.session.email %}
+                <a href="javascript:void(0);" class="btn-get-started scrollto">Welcome</a>
+            {% else %}
+                <a href="javascript:void(0);" class="btn-get-started scrollto login">Login</a>
+                <a href="javascript:void(0);" class="btn-projects scrollto register">Register</a>
+            {% endif %}
+        </div>
+    </div>
+    <div id="intro-carousel" class="owl-carousel" >
+        <div class="item" style="background-image: url('/intro-carousel/1.jpg');"></div>
+        <div class="item" style="background-image: url('/intro-carousel/2.jpg');"></div>
+        <div class="item" style="background-image: url('/intro-carousel/3.jpg');"></div>
+        <div class="item" style="background-image: url('/intro-carousel/4.jpg');"></div>
+        <div class="item" style="background-image: url('/intro-carousel/5.jpg');"></div>
+    </div>
+</section>
+<section id="contact" class="wow fadeInUp">
+    <div class="home-page">
+       <div class="container ">
+            <h1 class="recent-posts">Search By Keywords</h1>
+            <div class="section-header home-cont">
+                <form action="/searchjob" method="get">
+                    <input type="text" placeholder="Search.." name="search" id="autocomplete">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
+            </div>
+            
+            <h1 class="recent-posts">Recent Posts</h1>
+            <div class="bxslider">
+                {% if posts %}
+                    {% for post in posts %}
+                        <div class="post" style="width:100% !important;height:200px !important;" >
+                            <h3 onclick="window.location.href='/getpost/{{ post.id }}';">{{post.title}}</h3>
+                            <div class="post-desc">{{post.description|safe}}</div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            
+            <div class="row contact-info">
+                <div class="col-md-4">
+                    <div class="contact-address">
+                        <i class="ion-ios-location-outline"></i>
+                        <h3>Address</h3>
+                        <address>121 Brunel Rd, Mississauga, ON L4Z 3E9</address>
+                    </div>
+                </div>
+    
+                <div class="col-md-4">
+                    <div class="contact-phone">
+                        <i class="ion-ios-telephone-outline"></i>
+                        <h3>Phone Number</h3>
+                        <p><a href="tel:+16475319714"> +1 647 531 9714</a></p>
+                    </div>
+                </div>
+    
+                <div class="col-md-4">
+                    <div class="contact-email">
+                        <i class="ion-ios-email-outline"></i>
+                        <h3>Email</h3>
+                        <p><a href="mailto:info@advifity.com">info@advifity.com</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+{% block script %}
+<!-- Home Page JavaScript File -->
+<script src="{% static "js/jquery.bxslider.js" %}"></script>
+<script src="{% static "js/home.js" %}"></script>
+<script>
+    $(document).ready(function(){
+        $('.bxslider').bxSlider({
+            captions: true,
+            auto: true,
+            speed: 100,
+            width: 900
+        }); 
+    });
+</script>
+{% endblock %}

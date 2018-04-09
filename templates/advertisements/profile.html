@@ -1,0 +1,45 @@
+{% extends 'advertisements/base.html' %}  
+{% load static %}
+{% block content %}
+<!--==========================
+Profile Section
+============================-->
+<section id="contact" class="wow fadeInUp">
+    <div class="container">
+        <div class="section-header">
+            <h2>Profile <button type="button" class="btn btn-success" style="float:right;" onclick="window.location.href='{% url 'update' %}'">Update Profile</button></h2>
+        </div>
+    </div>
+    <div class="container">                                                                  
+        <div class="row">          
+            <div class="col-sm-7">
+                {% if user %}
+                    <p><b>First Name: </b>{{ user.firstname }}</p>
+                    <p><b>Last Name: </b>{{ user.lastname }}</p>
+                    <p><b>Email: </b>{{ user.email }}</p>
+                    {% if user.gender == 1 %}
+                        <p><b>Gender:</b> Male</p>
+                    {% else %}
+                        <p><b>Gender:</b> Female</p>
+                    {% endif %}
+                    {% if user.usertype == 1 %}
+                        <p><b>User Type:</b> Job Recruiter</p>
+                    {% else %}
+                        <p><b>User Type:</b> Job Seeker</p>
+                    {% endif %}
+                    <p><b>Address: </b>{{ user.address }}</p>
+                {% endif %}
+            </div>
+            {% if user.uploadedImage %}
+                <div class="col-sm-3">
+                    <div class="image"><img src="/{{ user.uploadedImage }}" /></div>
+                </div>
+            {% endif %}
+        </div>
+      </div>
+</section>
+{% if error %}
+<div id="errormessage" style="display:block;">{{ error }}</div>
+{% endif %}
+
+{% endblock %}

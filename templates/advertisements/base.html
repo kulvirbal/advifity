@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Advifity</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="" name="keywords">
+        <meta content="" name="description">
+
+        <!-- Favicons -->
+        <link href="{% static "img/favicon.png" %}" rel="icon">
+        <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800|Montserrat:300,400,700" rel="stylesheet">
+        <link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet"></link>
+        <!-- Bootstrap CSS File -->
+        <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
+
+        <!-- Libraries CSS Files -->
+        <link href="{% static "css/font-awesome.min.css" %}" rel="stylesheet">
+        <link href="{% static "css/animate.min.css" %}" rel="stylesheet">
+        <link href="{% static "css/ionicons.min.css" %}" rel="stylesheet">
+        <link href="{% static "css/owl.carousel.min.css" %}" rel="stylesheet">
+        <link href="{% static "css/magnific-popup.css" %}" rel="stylesheet">
+        <link href="{% static "css/ionicons.min.css" %}" rel="stylesheet">
+
+        <!-- Main Stylesheet File -->
+        <link href="{% static "css/style.css" %}" rel="stylesheet">
+        {% block style %}
+        {% endblock %}
+
+    </head>
+    <body id="body">
+        {% include "advertisements/header.html" %}
+        {% block content %}
+        {% endblock %}
+        {% include "advertisements/footer.html" %}
+        {% include "advertisements/login.html" %}
+        {% include "advertisements/register.html" %}
+        <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+        
+        <!-- JavaScript Libraries -->
+        <script src="{% static "js/jquery.min.js" %}"></script>
+        <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
+        <script src="{% static "js/jquery-migrate.min.js" %}"></script>
+        <script src="{% static "js/bootstrap.bundle.min.js" %}"></script>
+        <script src="{% static "js/easing.min.js" %}"></script>
+        <script src="{% static "js/hoverIntent.js" %}"></script>
+        <script src="{% static "js/superfish.min.js" %}"></script>
+        <script src="{% static "js/wow.min.js" %}"></script>
+        <script src="{% static "js/owl.carousel.min.js" %}"></script>
+        <script src="{% static "js/magnific-popup.min.js" %}"></script>
+        <script src="{% static "js/sticky.js" %}"></script>
+        <script src="{% static "js/jquery.validate.min.js" %}"></script>
+        <script src="{% static "js/additional-methods.min.js" %}"></script>
+        <!-- Template Main Javascript File -->
+        <script src="{% static "js/main.js" %}"></script>
+        <script src="{% static "js/script.js" %}"></script>
+        
+        {% block script %}
+        {% endblock %}
+    </body>
+</html>

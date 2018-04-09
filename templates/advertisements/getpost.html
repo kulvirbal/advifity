@@ -1,0 +1,58 @@
+{% extends 'advertisements/base.html' %}  
+{% load static %}
+{% block content %}
+<!--==========================
+View Post Section
+============================-->
+<section id="contact" class="wow fadeInUp">
+    <div class="container">
+        <div class="section-header">
+            <h2>Job Posts </h2>
+        </div>
+    </div>
+    <div class="container">                                                                  
+        <div class="table-responsive">          
+            <div class="col-sm-10">
+                {% if post %}
+                    <h3>Title</h3>
+                    <p>{{ post.title }}</p>
+                    <h3>Description</h3>
+                    <p>{{ post.description|safe }}</p>
+                    <p><b>Address: </b>{{ post.address }}</p>
+                    <p><b>Organization:</b> {{ post.organization }}</p>
+                    <p><b>Hourly Rate: </b>${{ post.hourly_rate }}</p>
+                    <p><b>Job Type: </b>{{ post.job_type }}</p>
+                    <div id="google-map"></div>
+                    <input type="hidden" id="post_address" value="{{ post.address }}">
+                    <div id="directions-panel"></div>
+                    {% if request.session.user_type == 2 %}
+                        <input type="hidden" id="user_address" value="{{ request.session.address }}">
+                        {% if already == 'true' %}
+                            <div id="sendmessage" style="display:block;">Your have already applied to this job. Thank you!</div>
+                        {% else %}
+                            <form action="" method="post" id="apply-post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label for="resume">Upload Resume</label>
+                                    <input type="file" name="resume">
+                                </div>
+                                <div class="form-group">
+                                    <input type="hidden" name="post_id" value="{{post.id}}" />
+                                    <label for="cover_letter"> Cover Letter (Optional)</label>
+                                    <textarea class="form-control" id="cover_letter" name="cover_letter" style="height:150px;"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-success">Apply Now</button>
+                            </form>
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+      </div>
+</section>
+{% endblock %}
+{% block script %}
+<!-- Apply Post Form JavaScript File -->
+<script src="{% static "js/applyPost.js" %}"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDgybomWDC2uEe-d184KldpGiRRLQYXbJU&callback=initMap"></script>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'advertisements/base.html' %}  
+{% load static %}
+{% block content %}
+<!--==========================
+View Post Section
+============================-->
+<section id="contact" class="wow fadeInUp">
+    <div class="container">
+        <div class="section-header">
+            <h2>Job Posts <button type="button" class="btn btn-link" style="float:right;" onclick="window.location.href='/post/';">Back</button></h2>
+        </div>
+    </div>
+    <div class="container"> 
+        <div class="col-sm-8">
+            {% if post %}
+                <h3>Title</h3>
+                <p>{{ post.title }}</p>
+                <h3>Description</h3>
+                <p>{{ post.description|safe }}</p>
+                <p><b>Address: </b>{{ post.address }}</p>
+                <p><b>Organization:</b> {{ post.organization }}</p>
+                <p><b>Hourly Rate: </b>${{ post.hourly_rate }}</p>
+                <p><b>Job Type: </b>{{ post.job_type }}</p>
+            {% endif %}
+        </div>
+        <div class="col-sm-4 who-applied">
+            <h4>Who Applied to This Job?</h4>
+            {% if userpost %}
+                <ul>
+                    {% for user_post in userpost %}
+                        <li>{{ user_post.user.firstname }} <a href="/{{ user_post.resume }}" target="blank">Download Resume</a></li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+            <div style="color:red;">No One Applied To This Job Yet.</div>
+            {% endif %}
+
+        </div>
+      </div>
+</section>
+{% endblock %}
+{% block script %}
+<!-- Contact Form JavaScript File -->
+<script src="{% static "js/post.js" %}"></script>
+{% endblock %}

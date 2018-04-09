@@ -1,0 +1,40 @@
+{% load static %}
+<section id="topbar" class="d-none d-lg-block">
+    <div class="container clearfix">
+        <div class="contact-info float-left">
+            <i class="fa fa-envelope-o"></i> <a href="mailto:info@advifity.com">info@advifity.com</a>
+            <i class="fa fa-phone"></i> +1 647 531 9714
+        </div>
+        <div class="social-links float-right">
+            {% if request.session.email %}
+                <a href="javascript:void(0);">Welcome <span class="session-username">{{ user.username }}</span></a>
+                <a href="{% url 'logout' %}">Logout</a>
+            {% endif %}
+                
+        </div>
+    </div>
+</section>
+
+<!--==========================
+Header
+============================-->
+<header id="header">
+    <div class="container">
+        <div id="logo" class="pull-left">
+            <h1><a href="{% url 'index' %}" class="scrollto">Advi<span>fity</span></a></h1>
+        </div>
+        <nav id="nav-menu-container">
+            <ul class="nav-menu">
+                <li class="menu-active"><a href="{% url 'index' %}">Home</a></li>
+                {% if request.session.email %}
+                    <li><a href="{% url 'profile' %}">Profile</a></li>
+                {% endif %}
+                <li><a href="{% url 'searchjob' %}">Recent Posts</a></li>
+                {% if request.session.user_type == 1 %}
+                    <li><a href="{% url 'post' %}">Job Posts</a></li>
+                {% endif %}
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+            </ul>
+        </nav><!-- #nav-menu-container -->
+    </div>
+</header><!-- #header -->

@@ -1,0 +1,61 @@
+{% extends 'advertisements/base.html' %}  
+{% load static %}
+{% block content %}
+<!--==========================
+Update Profile Section
+============================-->
+<section id="contact" class="wow fadeInUp">
+    <div class="container">
+        <div class="section-header">
+            <h2>UPDATE PROFILE<button type="button" class="btn btn-link" style="float:right;" onclick="window.location.href='/profile/';">Back</button></h2>
+        </div>
+    </div>
+    <div class="container">  
+        <div class="col-sm-8">                                                               
+            <form role="form" method="post" name="update-form" id="update-form" action="{% url 'update' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="firstname"> First Name</label>
+                    <input type="text" class="form-control" id="firstname" name="firstname" value="{{ user.firstname }}">
+                </div>
+                <div class="form-group">
+                    <label for="lastname"> Last Name</label>
+                    <input type="text" class="form-control" id="lastname" name="lastname" value="{{ user.lastname }}">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control" id="email" name="email" value="{{ user.email }}" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="password"> Password</label>
+                    <input type="password" class="form-control" id="u-password" name="password" >
+                </div>
+                <div class="form-group">
+                    <label for="cPassword">Confirm Password</label>
+                    <input type="password" class="form-control" id="cPassword" name="cPassword">
+                </div>
+                <div class="form-group">
+                    <label>Gender</label>
+                    <select class="form-control" name="gender" id="gender">
+                        <option value="">Select Gender</option>
+                        <option value="1" {% if user.gender == 1 %} selected {% endif %}>Male</option>
+                        <option value="2" {% if user.gender == 2 %} selected {% endif %}>Female</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="Address"> Address</label>
+                    <textarea class="form-control" id="address" name="address">{{ user.address }}</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="image">Upload Image</label>
+                    <input type="file" name="pic">
+                </div>
+                <div class="text-center">
+                    <input type="submit" value="Update">
+                    <input type="reset" value="Reset">
+                </div>
+            </form>
+        </div> 
+    </div>
+</section>
+{% endblock %}
